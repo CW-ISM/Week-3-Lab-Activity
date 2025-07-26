@@ -1,51 +1,51 @@
 ﻿@model IEnumerable<ThreeDPrinters>
-
 @{
     ViewData["Title"] = "Printer List";
 }
 
-<h1>PrinterList</h1>
+<h1>Printer List</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.SKU)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BuildVolume)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrinterImage)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SKU)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BuildVolume)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrinterImage)
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<!-- Desktop Table Layout -->
+<div class="d-none d-md-block">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.SKU)</th>
+                <th>@Html.DisplayNameFor(model => model.Title)</th>
+                <th>@Html.DisplayNameFor(model => model.Price)</th>
+                <th>@Html.DisplayNameFor(model => model.BuildVolume)</th>
+                <th>@Html.DisplayNameFor(model => model.PrinterImage)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>@item.SKU</td>
+                        <td>@item.Title</td>
+                        <td>@item.Price</td>
+                        <td>@item.BuildVolume</td>
+                        <td>
+                            <img src="@item.PrinterImage" alt="Printer" style="max-height: 100px; object-fit: cover;" />
+                        </td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Mobile Card Layout -->
+<div class="d-block d-md-none">
+    @foreach (var item in Model)
+    {
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <p class="card-text mb-1"><strong>Price:</strong> @item.Price</p>
+                    <p class="card-text mb-1"><strong>SKU:</strong> @item.SKU</p>
+                    <p class="card-text mb-2"><strong>Build Volume:</strong> @item.BuildVolume</p>
+                    <img src="@item.PrinterImage" alt="Printer" class="img-fluid" style="max-height: 200px; object-fit: cover;" />
+                </div>
+            </div>
+    }
+</div>
